@@ -18,7 +18,7 @@
 
 + (void)hookIrvue {
     //      获取更新时间间隔
-    Method originalMethod = class_getInstanceMethod(objc_getClass("LPWallpaperManager"), @selector(updateInterval));
+    Method originalMethod = class_getInstanceMethod(objc_getClass("LPWallpaperManager"), NSSelectorFromString(@"updateInterval"));
     Method swizzledMethod = class_getInstanceMethod([self class], @selector(hook_updateInterval));
     if(originalMethod && swizzledMethod) {
         method_exchangeImplementations(originalMethod, swizzledMethod);
@@ -32,7 +32,7 @@
 }
 
 - (double)hook_updateInterval {
-    NSLog(@"=== hook_updateInterval ===");
+    NSLog(@"=== Custom update interval for Irvue ===");
     return 300.0;
 }
 
